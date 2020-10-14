@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="gradient1">#88304e</color>
+    <color name="gradient2">#e23e57</color>
+    <color name="grayColor">#8f8f8f</color>
+    <color name="login_form_details_light">#1affffff</color>
+    <color name="login_form_details">#ccffffff</color>
+    <color name="login_form_details_medium">#66ffffff</color>
+    <color name="editText">#9AF8F5F5</color>
+
+</resources>
