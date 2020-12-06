@@ -12,8 +12,14 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private DatabaseReference databaseRef;
+    private FirebaseDatabase database;
+    private FirebaseUser user;
     private FirebaseAuth auth;
     private BottomNavigationView bottomNavigationView;
 
@@ -23,6 +29,11 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
+
+        database = FirebaseDatabase.getInstance();
+        databaseRef = database.getReference("Posts");
+        databaseRef.keepSynced(true);
 
         bottomNavigationView = findViewById(R.id.bottomNav);
 
@@ -56,10 +67,16 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.signOut){
-            auth.signOut();
-            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-            finish();
+        switch (item.getItemId()) {
+            case R.id.addpost:
+                startActivity(new Intent(HomeActivity.this, AddPostActivity.class));
+                break;
+
+            case R.id.signOut:
+                auth.signOut();
+                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                finish();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

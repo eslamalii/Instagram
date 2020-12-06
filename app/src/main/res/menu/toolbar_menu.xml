@@ -5,7 +5,13 @@
     <item
         android:id="@+id/signOut"
         android:icon="@drawable/ic_baseline"
-        app:showAsAction="always"
-        android:title="" />
+        android:title=""
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/addpost"
+        android:icon="@drawable/ic_outline_add"
+        android:title=""
+        app:showAsAction="always" />
 
 </menu>
