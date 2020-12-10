@@ -5,36 +5,43 @@
     android:layout_height="match_parent"
     tools:context=".AddPostActivity">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/addImagePost"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_outline_add" />
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/titlePost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/addImagePost"
-            android:hint="Title" />
+            <ImageButton
+                android:id="@+id/addImagePost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_outline_add" />
 
-        <EditText
-            android:id="@+id/desPost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/titlePost" />
+            <EditText
+                android:id="@+id/titlePost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/addImagePost"
+                android:hint="Title" />
 
-        <Button
-            android:id="@+id/submitPost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="Sumbit" />
+            <EditText
+                android:id="@+id/desPost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titlePost" />
 
-    </RelativeLayout>
+            <Button
+                android:id="@+id/submitPost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="Sumbit" />
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
