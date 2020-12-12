@@ -76,8 +76,6 @@ public class AddPostActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     @Override
@@ -100,25 +98,36 @@ public class AddPostActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(titleVel) & !TextUtils.isEmpty(desVel)
                 && mImageUri != null) {
 
-            StorageReference ref = storageReference.child(String.valueOf(System.currentTimeMillis()));
+            final StorageReference ref = storageReference.child(String.valueOf(System.currentTimeMillis()));
 
             ref.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
                     Task<Uri> downloadUrl = taskSnapshot.getStorage().getDownloadUrl();
 
-                    DatabaseReference dbRef = databaseReference.push();
+                    final DatabaseReference dbRef = databaseReference.push();
 
-                    Map<String, String> dataToSave = new HashMap<>();
+                    final Map<String, String> dataToSave = new HashMap<>();
                     dataToSave.put("title", titleVel);
                     dataToSave.put("desc", desVel);
-                    dataToSave.put("image", downloadUrl.toString());
                     dataToSave.put("timestamp", String.valueOf(System.currentTimeMillis()));
                     dataToSave.put("userid", user.getUid());
+
+                    downloadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String imageUri = uri.toString();
+                            dbRef.child("image").setValue(imageUri);
+                        }
+                    });
 
                     dbRef.setValue(dataToSave);
 
                     mProgressDialog.dismiss();
+
+                    startActivity(new Intent(AddPostActivity.this, HomeActivity.class));
+                    finish();
 
                 }
             });
