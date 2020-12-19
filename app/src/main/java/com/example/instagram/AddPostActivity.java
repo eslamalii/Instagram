@@ -50,8 +50,6 @@ public class AddPostActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         storageReference = FirebaseStorage.getInstance().getReference();
-
-
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Posts");
 
         mPostTitle = findViewById(R.id.titlePost);
