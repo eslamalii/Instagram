@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapter.ViewHolder> {
@@ -37,6 +39,11 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         holder.title.setText(blog.getTitle());
         holder.des.setText(blog.getDesc());
 
+        imageUrl = blog.getImage();
+        Picasso.get()
+                .load(imageUrl)
+                .into(holder.image);
+
     }
 
     @Override
@@ -62,8 +69,6 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
 
             timestamp = null;
             userid = null;
-
-
 
         }
     }
