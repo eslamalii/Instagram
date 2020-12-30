@@ -11,8 +11,9 @@
 
         <ImageButton
             android:id="@+id/addImagePost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="364dp"
+            android:layout_height="245dp"
+            android:layout_centerHorizontal="true"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_outline_add" />
 
@@ -21,14 +22,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/addImagePost"
-            android:hint="Title" />
+            android:hint="Title"
+            android:lines="1"
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/desPost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/titlePost"
-            android:hint="Password" />
+            android:hint="Password"
+            android:lines="1"
+            android:maxLines="1" />
 
         <Button
             android:id="@+id/submitPost"
