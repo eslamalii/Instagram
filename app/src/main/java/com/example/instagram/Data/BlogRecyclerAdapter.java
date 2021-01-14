@@ -1,4 +1,4 @@
-package com.example.instagram;
+package com.example.instagram.Data;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.instagram.Model.Blog;
+import com.example.instagram.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

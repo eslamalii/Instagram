@@ -1,4 +1,4 @@
-package com.example.instagram;
+package com.example.instagram.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.instagram.Model.Blog;
+import com.example.instagram.Data.BlogRecyclerAdapter;
+import com.example.instagram.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;

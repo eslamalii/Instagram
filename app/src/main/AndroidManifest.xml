@@ -9,14 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activities.Create_Acc"></activity>
         <activity
-            android:name=".AddPostActivity"
+            android:name=".Activities.AddPostActivity"
             android:theme="@style/MaterialAppTheme" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".Activities.HomeActivity"
             android:theme="@style/MaterialAppTheme" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activities.LoginActivity"
             android:theme="@style/MaterialAppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

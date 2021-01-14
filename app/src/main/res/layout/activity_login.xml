@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_gradient"
     android:fitsSystemWindows="true"
-    tools:context=".LoginActivity">
+    tools:context=".Activities.LoginActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
