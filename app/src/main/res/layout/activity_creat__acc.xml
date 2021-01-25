@@ -5,11 +5,23 @@
     android:layout_height="match_parent"
     tools:context=".Activities.Create_Acc">
 
+    <ImageButton
+        android:id="@+id/profilePic"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="39dp"
+        android:background="@android:drawable/screen_background_light_transparent"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/avatar" />
+
     <EditText
         android:id="@+id/firstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:layout_below="@+id/profilePic"
         android:hint="@string/first_name"
         android:importantForAutofill="no"
         android:inputType="text" />
