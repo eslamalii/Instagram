@@ -7,13 +7,14 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.instagram.R;
+import com.example.instagram.databinding.ActivityCreatAccBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,24 +28,21 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 public class Create_Acc extends AppCompatActivity {
 
-    private EditText firstName;
-    private EditText lastName;
-    private EditText email;
-    private EditText password;
-    private Button createAccount;
     private DatabaseReference mDatabaseReference;
     private FirebaseAuth mFirebaseAuth;
     private StorageReference mFirebaseStorage;
     private FirebaseDatabase mFirebaseDatabase;
     private ProgressDialog progressDialog;
-    private ImageButton profileImage;
     private Uri resultUri = null;
     private final static int GALLERY_CODE = 1;
+
+    private ActivityCreatAccBinding creatAccBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creat__acc);
+        creatAccBinding = DataBindingUtil.setContentView(this, R.layout.activity_creat__acc);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference().child("MUsers");
@@ -55,14 +53,7 @@ public class Create_Acc extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
 
-        firstName = findViewById(R.id.firstName);
-        lastName = findViewById(R.id.lastName);
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
-        createAccount = findViewById(R.id.createAcc);
-        profileImage = findViewById(R.id.profilePic);
-
-        profileImage.setOnClickListener(new View.OnClickListener() {
+        creatAccBinding.profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent galleryIntent = new Intent();
@@ -71,7 +62,7 @@ public class Create_Acc extends AppCompatActivity {
                 startActivityForResult(galleryIntent, GALLERY_CODE);
             }
         });
-        createAccount.setOnClickListener(new View.OnClickListener() {
+        creatAccBinding.createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createNewAcc();
@@ -80,10 +71,10 @@ public class Create_Acc extends AppCompatActivity {
     }
 
     private void createNewAcc() {
-        final String name = firstName.getText().toString().trim();
-        final String lname = lastName.getText().toString().trim();
-        String pwd = password.getText().toString().trim();
-        String em = email.getText().toString().trim();
+        final String name = creatAccBinding.firstName.getText().toString().trim();
+        final String lname = creatAccBinding.lastName.getText().toString().trim();
+        String pwd = creatAccBinding.password.getText().toString().trim();
+        String em = creatAccBinding.email.getText().toString().trim();
 
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(lname)
                 && !TextUtils.isEmpty(pwd) && !TextUtils.isEmpty(em)) {
@@ -105,7 +96,7 @@ public class Create_Acc extends AppCompatActivity {
                                 DatabaseReference currentUserDb = mDatabaseReference.child(userId);
 
                                 currentUserDb.child("firstname").setValue(name);
-                                currentUserDb.child("lastname").setValue(lname);
+                                currentUserDb.child("lastname   ").setValue(lname);
                                 currentUserDb.child("image").setValue(resultUri.toString());
 
                                 progressDialog.dismiss();
@@ -137,7 +128,7 @@ public class Create_Acc extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 resultUri = result.getUri();
-                profileImage.setImageURI(resultUri);
+                creatAccBinding.profilePic.setImageURI(resultUri);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }

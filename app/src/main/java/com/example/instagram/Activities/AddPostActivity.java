@@ -12,8 +12,10 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.instagram.R;
+import com.example.instagram.databinding.ActivityAddPostBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,10 +31,6 @@ import java.util.Map;
 
 public class AddPostActivity extends AppCompatActivity {
 
-    EditText mPostTitle;
-    EditText mPostDes;
-    ImageView mPostImage;
-    Button mSubmit;
     DatabaseReference databaseReference;
     FirebaseAuth auth;
     FirebaseUser user;
@@ -41,10 +39,13 @@ public class AddPostActivity extends AppCompatActivity {
     private static final int GALLARY_CODE = 1;
     private Uri mImageUri;
 
+    private ActivityAddPostBinding addPostBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
+        addPostBinding = DataBindingUtil.setContentView(this, R.layout.activity_add_post);
 
         mProgressDialog = new ProgressDialog(this);
 
@@ -53,12 +54,7 @@ public class AddPostActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Posts");
 
-        mPostTitle = findViewById(R.id.titlePost);
-        mPostDes = findViewById(R.id.desPost);
-        mPostImage = findViewById(R.id.addImagePost);
-        mSubmit = findViewById(R.id.submitPost);
-
-        mPostImage.setOnClickListener(new View.OnClickListener() {
+        addPostBinding.addImagePost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -67,7 +63,7 @@ public class AddPostActivity extends AppCompatActivity {
             }
         });
 
-        mSubmit.setOnClickListener(new View.OnClickListener() {
+        addPostBinding.submitPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -82,7 +78,7 @@ public class AddPostActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GALLARY_CODE && resultCode == RESULT_OK) {
             mImageUri = data.getData();
-            mPostImage.setImageURI(mImageUri);
+            addPostBinding.addImagePost.setImageURI(mImageUri);
         }
     }
 
@@ -91,8 +87,8 @@ public class AddPostActivity extends AppCompatActivity {
         mProgressDialog.setMessage("Posting to blog.....");
         mProgressDialog.show();
 
-        final String titleVel = mPostTitle.getText().toString().trim();
-        final String desVel = mPostDes.getText().toString().trim();
+        final String titleVel = addPostBinding.titlePost.getText().toString().trim();
+        final String desVel = addPostBinding.desPost.getText().toString().trim();
 
         if (!TextUtils.isEmpty(titleVel) & !TextUtils.isEmpty(desVel)
                 && mImageUri != null) {

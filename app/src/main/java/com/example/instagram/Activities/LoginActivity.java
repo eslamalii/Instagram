@@ -10,8 +10,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.instagram.R;
+import com.example.instagram.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -24,24 +26,21 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     private Context mContext;
-    private EditText mEmail;
-    private EditText mPassword;
-    private Button createAcc;
+
+    private ActivityLoginBinding loginBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        loginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
         mContext = LoginActivity.this;
-        mEmail = findViewById(R.id.email);
-        mPassword = findViewById(R.id.password);
 
         setupFirebaseAuth();
         init();
 
-        createAcc = findViewById(R.id.createAcc);
-        createAcc.setOnClickListener(new View.OnClickListener() {
+        loginBinding.createAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, Create_Acc.class));
@@ -56,12 +55,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void init() {
-        Button loginButton = findViewById(R.id.login);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        loginBinding.login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = mEmail.getText().toString();
-                String password = mPassword.getText().toString();
+                String email = loginBinding.email.getText().toString();
+                String password = loginBinding.password.getText().toString();
 
                 if (isStringNull(email) || isStringNull(password)) {
                     Toast.makeText(mContext, "You must fill out all the fields", Toast.LENGTH_LONG).show();
